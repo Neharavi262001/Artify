@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let currentPage = 1;
   let currentCategory = '';
-  const likedImages = [];
+  let likedImages = [];
   let  accessKey= 'E3A9y0TjAU1tClEJeY0eKDgMz9cxNrpFs6nLpsfsIm8'
 
 
@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //toggle
         addLikeButtonListeners();
+      
       }
     });
   }
@@ -68,22 +69,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   //toggle function
-  function toggleLike(event){
-    const button=event.target;
-    const   photoId = button.dataset.photoId;
-    const isLiked = button.dataset.liked === 'true';
+  //toggle function
+function toggleLike(event){
+  const button = event.target;
+  const photoId = button.dataset.photoId;
+  const isLiked = button.dataset.liked === 'true';
 
-    if (!isLiked) {
-      likedImages.push(photoId);
-      button.textContent = 'Unlike';
-      button.dataset.liked = 'true';
-    } else {
-      likedImages = likedImages.filter(id => id !== photoId);
-      button.textContent = 'Like';
-      button.dataset.liked = 'false';
-    }
-    renderFavorites();
+  if (!isLiked) {
+    likedImages.push(photoId);
+  } else {
+    likedImages = likedImages.filter(id => id !== photoId);
   }
+
+  // Toggle the button text content and dataset
+  button.textContent = isLiked ? 'Like' : 'Unlike';
+  button.dataset.liked = isLiked ? 'false' : 'true';
+
+  renderFavorites();
+}
 
 
   function renderFavorites() {
@@ -103,6 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (photoDetails) {
         favoriteDetails.push(photoDetails);
       }
+
+      console.log(favoriteDetails)
     });
 
        // Wait for all fetches to complete
@@ -112,31 +117,49 @@ document.addEventListener('DOMContentLoaded', () => {
           return `<div class="favorite-item">
                     <img src=${photo.urls.small} alt="Liked Artwork" />
                     <p>${photo.description || 'No description available'}</p>
+                    <button class="remove-btn">Remove</button>
                   </div>`;
         });
   
         // Update the Favorites container with the HTML
         favoritesContainer.innerHTML = favoriteUrls.join('');
+
+
+        const removeButtons = document.querySelectorAll('.favorite-item .remove-btn');
+        removeButtons.forEach((button,index) => {
+          const photoId = likedImages[index];
+          button.dataset.photoId = photoId;
+          button.addEventListener('click', removeFavoriteItem);
+        });
       });
     }
 
+    
+    function removeFavoriteItem(event) {
+      const button = event.target;
+      const photoId = button.dataset.photoId;
+    
+      // Remove the corresponding item from the likedImages array
+      likedImages = likedImages.filter((id) => id !== photoId);
+    
+      // Find the corresponding like button in the main gallery
+      const likeButton = document.querySelector(`.like-btn[data-photo-id="${photoId}"]`);
+    
+      // Update the like button text and dataset
+      if (likeButton) {
+        likeButton.textContent = 'Like';
+        likeButton.dataset.liked = 'false';
+      }
+    
+      // Remove the favorite item from the DOM
+      const favoriteItem = button.closest('.favorite-item');
+      favoriteItem.remove();
+    
+      // Re-render the favorites section
+      renderFavorites();
+    }
+    
 
-
-  // function fetchImageById(id){
-  //   unsplash.photos.get({
-  //     id:id
-  //   }).then(result => {
-  //     if (result.type === 'success') {
-  //       const photos = result.response.results;
-  //       console.log(photos);
-  //       const getUrls = photos.map(i => {
-  //         return `<img src=${i.urls.small}/>`;
-  //       });
-  //       main.innerHTML = getUrls.join('');
-  //     }
-  //   })
-
-  // }
 
 
 
@@ -190,17 +213,16 @@ function displayImageDetails(imageDetails){
   <p>${imageDetails.description}</p>
   <p>Author: ${imageDetails.author}</p>
   
-  <button>&times;</button>
+  <button class="close-popup">&times;</button>
 `;
 
-main.innerHTML = "";
+
 main.appendChild(card);
 
-const popupImg=document.querySelector('.image-card')
-const cancelpopUp=document.querySelector('.image-card button')
-cancelpopUp.addEventListener('click',()=>{
-  popupImg.style.display='none'
-
-})
+const cancelPopupButton = document.querySelector('.close-popup');
+cancelPopupButton.addEventListener('click', () => {
+  // Remove the card when the cancel button is clicked
+  card.remove();
+});
 }
 
