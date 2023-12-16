@@ -7,10 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const main = document.querySelector('.container');
   const favoritesContainer = document.getElementById('favorites-container');
 
-
-
-
-
   let currentPage = 1;
   let currentCategory = '';
   let likedImages = [];
@@ -47,7 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
           const isLiked=likedImages.includes(photo.id)
           return ` <div class="image-container">
           <img src=${photo.urls.small} alt="Artwork" />
-          <button class="like-btn" data-photo-id="${photo.id}" data-liked="${isLiked}">${isLiked ? 'Unlike' : 'Like'}</button>
+          <div class='image-description'>
+          <button class="like-btn" data-photo-id="${photo.id}" data-liked="${isLiked}">${isLiked ? '&#10084;' :'&#129293;'  }</button>
+          <p>${photo.alt_description}</p>
+          
+          </div>
+         
         </div>`;
         });
         main.innerHTML = getUrls.join('');
@@ -82,7 +83,7 @@ function toggleLike(event){
   }
 
   // Toggle the button text content and dataset
-  button.textContent = isLiked ? 'Like' : 'Unlike';
+  button.innerHTML = isLiked ?   '&#129293;' : '&#10084;' ;
   button.dataset.liked = isLiked ? 'false' : 'true';
 
   renderFavorites();
@@ -147,7 +148,7 @@ function toggleLike(event){
     
       // Update the like button text and dataset
       if (likeButton) {
-        likeButton.textContent = 'Like';
+        likeButton.innerHTML = '&#129293;';
         likeButton.dataset.liked = 'false';
       }
     
@@ -159,11 +160,6 @@ function toggleLike(event){
       renderFavorites();
     }
     
-
-
-
-
-
 
 
 
@@ -180,49 +176,55 @@ function toggleLike(event){
 
 
 
-main.addEventListener('click', (event)=>{
-  if (event.target.tagName==='IMG'){
-    const selectedImage= event.target;
-    const imageUrl=selectedImage.src;
-    const imageDetails=getImageDetails(imageUrl)
+main.addEventListener('click', (event) => {
+  if (event.target.tagName === 'IMG') {
+    const selectedImage = event.target;
+    const imageUrl = selectedImage.src;
+    const imageDetails = getImageDetails(imageUrl);
 
-    displayImageDetails(imageDetails)
-
+    displayImageDetails(imageDetails);
   }
-})
+});
 
-
-function getImageDetails(imageUrl){
-
+function getImageDetails(imageUrl) {
   return {
-    title:"title",
-    description:"image desc",
-    author:"author",
-    imageUrl:imageUrl
-  }
+    title: "title",
+    description: "image desc",
+    author: "author",
+    imageUrl: imageUrl,
+  };
 }
 
+function displayImageDetails(imageDetails) {
+  // Create a popup container
+  const popupContainer = document.createElement("div");
+  popupContainer.classList.add("popup-container");
 
-function displayImageDetails(imageDetails){
+  // Create the image card
   const card = document.createElement("div");
   card.classList.add("image-card");
 
   card.innerHTML = `
-  <img src="${imageDetails.imageUrl}" alt="${imageDetails.title}">
-  <h3>${imageDetails.title}</h3>
-  <p>${imageDetails.description}</p>
-  <p>Author: ${imageDetails.author}</p>
+    <img src="${imageDetails.imageUrl}" alt="${imageDetails.title}">
+    <h3>${imageDetails.title}</h3>
+    <p>${imageDetails.description}</p>
+    <p>Author: ${imageDetails.author}</p>
   
-  <button class="close-popup">&times;</button>
-`;
+    <button class="close-popup">&times;</button>
+  `;
 
+  // Append the card to the popup container
+  popupContainer.appendChild(card);
 
-main.appendChild(card);
+  // Append the popup container to the body
+  document.body.appendChild(popupContainer);
 
-const cancelPopupButton = document.querySelector('.close-popup');
-cancelPopupButton.addEventListener('click', () => {
-  // Remove the card when the cancel button is clicked
-  card.remove();
-});
+  // Add event listener to close the popup when the close button is clicked
+  const cancelPopupButton = document.querySelector('.close-popup');
+  cancelPopupButton.addEventListener('click', () => {
+    // Remove the popup container when the cancel button is clicked
+    popupContainer.remove();
+  });
 }
+
 
