@@ -15,5 +15,8 @@
   },
   "msw": {
     "workerDirectory": "src/public"
+  },
+  "dependencies": {
+    "unsplash-js": "^7.0.19"
   }
 }

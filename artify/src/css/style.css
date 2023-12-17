@@ -9,22 +9,20 @@ body {
   margin: 0px;
   padding: 0px;
   scroll-behavior: smooth;
-
 }
-#main{
+#main {
   background-color: #efeffc;
 }
 
-
-header nav{
+header nav {
   display: flex;
   height: 5%;
-    justify-content: space-between;
-    align-items: center;
-    padding :20px;
-    box-shadow: -1px 6px 10px 0px rgba(99,97,97,0.75);
-    position: fixed;
-    top: 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  box-shadow: -1px 6px 10px 0px rgba(99, 97, 97, 0.75);
+  position: fixed;
+  top: 0;
   left: 0;
 
   width: 100%;
@@ -32,32 +30,30 @@ header nav{
   z-index: 1000;
 }
 
-.nav-heading{
+.nav-heading {
   font-size: 30px;
   font-weight: bolder;
-  
 }
 
-.nav-menu{
+.nav-menu {
   display: flex;
-    align-items: center;
-    list-style: none;
-    gap: 50px;
+  align-items: center;
+  list-style: none;
+  gap: 50px;
 }
 
-.nav-menu li .nav-link{
+.nav-menu li .nav-link {
   cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: rgb(22, 21, 21);
-    font-size: 15px;
-    font-weight:bold;
-    padding: 10px;
-    text-decoration: none;
-    transition: color 0.3s, background-color 0.3s, transform 0.3s;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(22, 21, 21);
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px;
+  text-decoration: none;
+  transition: color 0.3s, background-color 0.3s, transform 0.3s;
 }
 
 .nav-menu li .nav-link:hover,
@@ -65,70 +61,65 @@ nav .favorites :hover {
   color: #0a0a0a; /* Change to the desired text color on hover */
   background-color: white;
   border-radius: 10px;
-  box-shadow: -1px 6px 10px 0px rgba(99,97,97,0.75); 
+  box-shadow: -1px 6px 10px 0px rgba(99, 97, 97, 0.75);
   transform: scale(1.09);
 }
-
 
 .nav-menu li .nav-link.active,
 nav .favorites.active {
   color: #ffffff; /* Change to the desired text color for the active state */
-  background-color: #060606; 
+  background-color: #060606;
   border-radius: 10px;
-  box-shadow: -1px 6px 10px 0px rgba(99,97,97,0.75); 
-  
+  box-shadow: -1px 6px 10px 0px rgba(99, 97, 97, 0.75);
+
   transition-delay: 0.1s;
 }
 
-.home:hover{
+.home:hover {
   color: #0a0a0a; /* Change to the desired text color on hover */
   background-color: white;
   border-radius: 10px;
-  box-shadow: -1px 6px 10px 0px rgba(99,97,97,0.75); 
+  box-shadow: -1px 6px 10px 0px rgba(99, 97, 97, 0.75);
   transform: scale(1.09);
 }
 .home.active {
   color: #ffffff; /* Change to the desired text color for the active state */
-  background-color: #060606; 
+  background-color: #060606;
   border-radius: 10px;
-  box-shadow: -1px 6px 10px 0px rgba(99,97,97,0.75); 
-  
+  box-shadow: -1px 6px 10px 0px rgba(99, 97, 97, 0.75);
+
   transition-delay: 0.1s;
 }
 
-nav .home{
+nav .home {
   cursor: pointer;
   padding: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: rgb(22, 21, 21);
-      font-size: 15px;
-      font-weight:bold;
-      text-decoration: none;
-      margin-right: 50px;
-      transition: color 0.3s, background-color 0.3s, transform 0.3s;
-}  
-  
-
-
-nav .favorites{
-  cursor: pointer;
-padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: rgb(22, 21, 21);
-    font-size: 15px;
-    font-weight:bold;
-    text-decoration: none;
-    margin-right: 50px;
-    transition: color 0.3s, background-color 0.3s, transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(22, 21, 21);
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-right: 50px;
+  transition: color 0.3s, background-color 0.3s, transform 0.3s;
 }
 
-
+nav .favorites {
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(22, 21, 21);
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-right: 50px;
+  transition: color 0.3s, background-color 0.3s, transform 0.3s;
+}
 
 .nav-toggle {
   display: none;
@@ -136,21 +127,20 @@ padding: 10px;
   font-size: 20px;
 }
 
-
-
-.container{
+.container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   margin-top: 80px;
-  
 }
 #home-section {
   width: 100vw;
   height: 80vh;
   text-align: center;
   padding: 40px;
-  background-image: url("artify/src/images/d-koi-MG2fnK6pOdk-unsplash.jpg");
+  background: url('../images/d-koi-MG2fnK6pOdk-unsplash.jpg');
+  object-fit: cover;
+  background-size: contain;
   border-bottom: 1px solid #ddd;
   display: flex;
   flex-direction: column;
@@ -165,12 +155,12 @@ padding: 10px;
 #explore-home {
   position: relative;
   z-index: 2;
-  color: rgb(1, 1, 1); 
+  color: rgb(1, 1, 1);
 }
 
 @keyframes fadeIn {
   to {
-    opacity: 1; 
+    opacity: 1;
   }
 }
 
@@ -181,6 +171,7 @@ padding: 10px;
 
 #home-section p {
   font-size: 1.3em;
+
   color: #666;
   margin-top: 15px;
 }
@@ -207,7 +198,6 @@ padding: 10px;
   transform: scale(0.9);
 }
 
-
 .about-section {
   width: 100vw;
   height: 80vh;
@@ -227,63 +217,56 @@ padding: 10px;
   margin-top: 15px;
 }
 
-.contact{
+.contact {
   background-color: #333;
   color: white;
   width: 100vw;
   padding: 20px;
   font-weight: lighter;
-  
 }
 
-.contact p{
+.contact p {
   text-align: center;
 }
 
-
-.image-container{
-  width: calc(33.33% - 20px); 
+.image-container {
+  width: calc(33.33% - 20px);
   background-color: #fff;
   margin: 10px;
 
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  
 }
 
-.image-container img{
+.image-container img {
   width: 100%;
   height: 75%;
-  border-radius: 8px; 
+  border-radius: 8px;
   transition: transform 0.3s ease-in-out;
 }
 
-.image-container:hover img{
+.image-container:hover img {
   transform: scale(1.1);
 }
 
-.image-description{
+.image-description {
   display: flex;
   flex-direction: row;
-  
+
   align-items: center;
   margin: 5px;
 }
 
 .image-description p {
-  
   color: #0f0f0f;
   text-align: center;
   font-size: smaller;
- margin:10px 5px;
- 
-  
-  
+  margin: 10px 5px;
 }
 
-.image-description .like-btn{
-  margin:  10px ;
+.image-description .like-btn {
+  margin: 10px;
   background-color: transparent;
   border: none;
   width: 50px;
@@ -291,20 +274,15 @@ padding: 10px;
   font-size: 1.5rem;
   cursor: pointer;
   transition: color 0.3s;
-
 }
 
 .image-description .like-btn:hover {
-  color: rgb(255, 0, 0); 
+  color: rgb(255, 0, 0);
 }
 
 .image-description .like-btn:active {
-  color: rgb(128, 0, 0); 
+  color: rgb(128, 0, 0);
 }
-
-
-
-
 
 #overlay {
   display: none;
@@ -347,105 +325,96 @@ padding: 10px;
   cursor: pointer;
 }
 
-
-.favorite-item{
-  width: calc(33.33% - 20px); 
+.favorite-item {
+  width: calc(33.33% - 20px);
   margin: 10px;
   overflow: hidden;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-   background-color: #fff;
+  background-color: #fff;
 }
 
-.favorite-item .favorite-image{
+.favorite-item .favorite-image {
   width: 100%;
   height: 75%;
-  border-radius: 8px; 
+  border-radius: 8px;
   transition: transform 0.3s ease-in-out;
 }
 
-.favorite-item:hover .favorite-image{
+.favorite-item:hover .favorite-image {
   transform: scale(1.1);
 }
 
-.favorite-item p{
+.favorite-item p {
   text-align: center;
   font-size: smaller;
 }
-.favorite-item .remove-btn{
-  margin:1px 40%;
+.favorite-item .remove-btn {
+  margin: 1px 40%;
   background-color: rgb(225, 176, 176);
   border: 3px solid rgb(173, 20, 20);
   width: 80px;
   height: 30px;
   border-radius: 30px;
   cursor: pointer;
-  
+
   font-size: 0.8rem;
   font-weight: bolder;
-  color:rgb(173, 20, 20) ;
+  color: rgb(173, 20, 20);
   text-align: center;
-
 }
 
 .favorite-item .remove-btn:hover {
-  background-color: rgb(173, 20, 20); /* Change to the desired hover background color */
+  background-color: rgb(
+    173,
+    20,
+    20
+  ); /* Change to the desired hover background color */
   color: white; /* Change to the desired hover text color */
 }
 .favorite-item .remove-btn:active {
-  background-color: rgb(238, 10, 10); /* Change to the desired active background color */
-  border-color:  rgb(238, 10, 10); /* Change to the desired active border color */
+  background-color: rgb(
+    238,
+    10,
+    10
+  ); /* Change to the desired active background color */
+  border-color: rgb(
+    238,
+    10,
+    10
+  ); /* Change to the desired active border color */
   color: white; /* Change to the desired active text color */
 }
 
-.prev-next{
+.prev-next {
   display: flex;
   justify-content: center;
   align-items: center;
   width: auto;
   height: 3rem;
   gap: 10px;
-  
 }
 
-.prev-next-btns{
+.prev-next-btns {
   font-size: 15px;
   font-weight: 40px;
   border-radius: 4px;
   background-color: white;
-
 }
 
- 
-  #show-less-btn:hover,
-  #show-more-btn:hover {
-    background-color: #ddd;
-    color: #333;
-  }
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
+#show-less-btn:hover,
+#show-more-btn:hover {
+  background-color: #ddd;
+  color: #333;
+}
 
 @media screen and (max-width: 768px) {
   .image-container {
     width: calc(100% - 20px);
   }
 
-  .favorite-item{
+  .favorite-item {
     width: calc(100% - 20px);
-
   }
 
   .nav-menu {
@@ -472,10 +441,4 @@ padding: 10px;
   .nav-toggle {
     display: block;
   }
-
-
-
 }
-
-
-
