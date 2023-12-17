@@ -229,55 +229,32 @@ function displayImageDetails(imageDetails) {
 
 
 
-// main.addEventListener('click', (event) => {
-//   if (event.target.tagName === 'IMG') {
-//     const selectedImage = event.target;
-//     const imageUrl = selectedImage.src;
-//     const imageDetails = getImageDetails(imageUrl);
 
-//     displayImageDetails(imageDetails);
-//   }
-// });
 
-// function getImageDetails(imageUrl) {
-//   return {
-//     title: "title",
-//     description: "image desc",
-//     author: "author",
-//     imageUrl: imageUrl,
-//   };
-// }
+const navMenu = document.querySelector('#navMenu');
+const navToggle = document.querySelector('.nav-toggle');
 
-// function displayImageDetails(imageDetails) {
-//   // Create a popup container
-//   const popupContainer = document.createElement("div");
-//   popupContainer.classList.add("popup-container");
+navToggle.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+});
 
-//   // Create the image card
-//   const card = document.createElement("div");
-//   card.classList.add("image-card");
 
-//   card.innerHTML = `
-//     <img src="${imageDetails.imageUrl}" alt="${imageDetails.title}">
-//     <h3>${imageDetails.title}</h3>
-//     <p>${imageDetails.description}</p>
-//     <p>Author: ${imageDetails.author}</p>
-  
-//     <button class="close-popup">&times;</button>
-//   `;
+document.addEventListener('DOMContentLoaded', function () {
+  const navLinks = document.querySelectorAll('.nav-link, .favorites');
 
-//   // Append the card to the popup container
-//   popupContainer.appendChild(card);
+  navLinks.forEach(link => {
+    link.addEventListener('click', function (event) {
+      // Remove the 'active' class from all links
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+      });
 
-//   // Append the popup container to the body
-//   document.body.appendChild(popupContainer);
+      // Add the 'active' class to the clicked link
+      this.classList.add('active');
 
-//   // Add event listener to close the popup when the close button is clicked
-//   const cancelPopupButton = document.querySelector('.close-popup');
-//   cancelPopupButton.addEventListener('click', () => {
-//     // Remove the popup container when the cancel button is clicked
-//     popupContainer.remove();
-//   });
-// }
-
+      // Prevent the default behavior of the link (e.g., page reload)
+      event.preventDefault();
+    });
+  });
+});
 
