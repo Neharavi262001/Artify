@@ -20,7 +20,7 @@ body {
 }
 
 .image-container{
-  width: calc(29.33% - 20px); /* Adjust the width and margin as needed */
+  width: calc(29.33% - 20px); 
   margin: 10px;
   overflow: hidden;
   border-radius: 8px;
@@ -29,7 +29,7 @@ body {
 .image-container img{
   width: 100%;
   height: 75%;
-  border-radius: 8px; /* Same as gallery item for rounded corners */
+  border-radius: 8px; 
   transition: transform 0.3s ease-in-out;
 }
 
@@ -158,7 +158,7 @@ header nav ul li a.active {
 
 
 .favorite-item{
-  width: calc(29.33% - 20px); /* Adjust the width and margin as needed */
+  width: calc(29.33% - 20px); 
   margin: 10px;
   overflow: hidden;
   border-radius: 8px;
@@ -168,7 +168,7 @@ header nav ul li a.active {
 .favorite-item .favorite-image{
   width: 100%;
   height: 75%;
-  border-radius: 8px; /* Same as gallery item for rounded corners */
+  border-radius: 8px; 
   transition: transform 0.3s ease-in-out;
 }
 
