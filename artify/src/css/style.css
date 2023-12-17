@@ -10,7 +10,9 @@ body {
   padding: 0px;
 
 }
-
+#main{
+  background-color: #efeffc;
+}
 
 
 header nav{
@@ -110,20 +112,20 @@ padding: 10px;
   flex-wrap: wrap;
   justify-content: space-around;
   margin-top: 80px;
-  background-color: #efeffc;
+  
 }
 
 .image-container{
   width: calc(29.33% - 20px); 
   background-color: #fff;
   margin: 10px;
+
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  .image-description .like-btn:active {
-  color: rgb(128, 0, 0); /* Change to the desired active color */
+  
 }
-}
+
 .image-container img{
   width: 100%;
   height: 75%;
@@ -173,6 +175,7 @@ padding: 10px;
 .image-description .like-btn:active {
   color: rgb(128, 0, 0); 
 }
+
 
 
 
@@ -268,6 +271,34 @@ padding: 10px;
   border-color:  rgb(238, 10, 10); /* Change to the desired active border color */
   color: white; /* Change to the desired active text color */
 }
+
+.prev-next{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 3rem;
+  gap: 10px;
+  
+}
+
+.prev-next-btns{
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 4px;
+  background-color: white;
+
+}
+
+ 
+  #show-less-btn:hover,
+  #show-more-btn:hover {
+    background-color: #ddd;
+    color: #333;
+  }
+
+  
+
 
 
 

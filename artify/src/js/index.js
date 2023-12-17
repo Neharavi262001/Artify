@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .getPhotos({
       query: category,
       page: page,
-      perPage: 25,
+      perPage: 12,
       orientation: 'landscape'
     })
     .then(result => {
@@ -186,6 +186,15 @@ function toggleLike(event){
     renderGallery(currentCategory, currentPage);
   });
 
+  const LoadlessBtn=document.querySelector('#show-less-btn');
+  LoadlessBtn.addEventListener('click',()=>{
+    if (currentPage > 1){
+      currentPage--;
+      renderGallery(currentCategory, currentPage);
+    }
+    
+  })
+
   renderGallery('Home');
 });
 
@@ -215,8 +224,8 @@ function displayImageDetails(imageDetails) {
   <img src="${imageDetails.imageUrl}" alt="${imageDetails.title}" title="Click to see full image">
 </a>
   <h3>${imageDetails.title.toUpperCase()}</h3>
-  
-  <p>Author : ${imageDetails.author.first_name}</p>
+  <p>${imageDetails.description || 'No description available'}</p>
+  <p>Artist : ${imageDetails.author.first_name}</p>
   <p>Updated at : ${imageDetails.author.updated_at}</p>
   <a href='${imageDetails.author.links.html}' target="_blank">See more</a>
   
