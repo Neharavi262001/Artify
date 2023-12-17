@@ -1,24 +1,22 @@
 import {createApi} from 'unsplash-js'
+let  accessKey= 'E3A9y0TjAU1tClEJeY0eKDgMz9cxNrpFs6nLpsfsIm8'
+const unsplash = createApi({
+  accessKey:accessKey
+});
 
 
 
 document.addEventListener('DOMContentLoaded', () => {
 
   const main = document.querySelector('.container');
-  const favoritesContainer = document.getElementById('favorites-container');
+  //const favoritesContainer = document.getElementById('favorites-container');
 
   let currentPage = 1;
   let currentCategory = '';
-  let likedImages = [];
-  let  accessKey= 'E3A9y0TjAU1tClEJeY0eKDgMz9cxNrpFs6nLpsfsIm8'
-
-
-  const unsplash = createApi({
-    accessKey:accessKey
-  });
-
+  let likedImages = JSON.parse(localStorage.getItem('likedImages')) || [];
+  
   const navLinks = document.querySelectorAll(".nav-link");
-
+  const favorites = document.querySelector('.favorites');
   navLinks.forEach((link) => {
     link.addEventListener("click", function (event) {
       event.preventDefault();
@@ -28,21 +26,25 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(selectedCategory);
     });
   });
+  favorites.addEventListener('click', renderFavorites);
+
 
   function renderGallery(category, page) {
-    unsplash.search.getPhotos({
+    unsplash.search
+    .getPhotos({
       query: category,
       page: page,
       perPage: 25,
       orientation: 'landscape'
-    }).then(result => {
+    })
+    .then(result => {
       if (result.type === 'success') {
         const photos = result.response.results;
         console.log(photos);
         const getUrls = photos.map(photo => {
           const isLiked=likedImages.includes(photo.id)
-          return ` <div class="image-container">
-          <img src=${photo.urls.small} alt="Artwork" />
+          return ` <div data-id=${photo.id} class="image-container">
+          <img class='imageButton' src=${photo.urls.small} alt="Artwork" />
           <div class='image-description'>
           <button class="like-btn" data-photo-id="${photo.id}" data-liked="${isLiked}">${isLiked ? '&#10084;' :'&#129293;'  }</button>
           <p>${photo.alt_description}</p>
@@ -53,12 +55,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         main.innerHTML = getUrls.join('');
 
-        //toggle
+        
         addLikeButtonListeners();
+        const imageButton = document.querySelector('.imageButton');
+
+          imageButton.addEventListener('click', displayImageDetails);
       
       }
     });
   }
+
+
 
 
   // Favourites section
@@ -68,6 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
       button.addEventListener('click', toggleLike);
     });
   }
+
+  main.addEventListener('click', async (e) => {
+    if (e.target.tagName === 'IMG') {
+      const imageId = e.target.parentElement.getAttribute('data-id');
+      const imageDetails = await getImageDetails(imageId);
+      displayImageDetails(imageDetails);
+    }
+  });
 
   //toggle function
   //toggle function
@@ -81,12 +96,12 @@ function toggleLike(event){
   } else {
     likedImages = likedImages.filter(id => id !== photoId);
   }
-
+  localStorage.setItem('likedImages', JSON.stringify(likedImages));
   // Toggle the button text content and dataset
   button.innerHTML = isLiked ?   '&#129293;' : '&#10084;' ;
   button.dataset.liked = isLiked ? 'false' : 'true';
 
-  renderFavorites();
+  //renderFavorites();
 }
 
 
@@ -115,15 +130,16 @@ function toggleLike(event){
        Promise.all(fetchDetailsPromises).then(() => {
         // Generate HTML for each liked photo
         const favoriteUrls = favoriteDetails.map((photo) => {
-          return `<div class="favorite-item">
-                    <img src=${photo.urls.small} alt="Liked Artwork" />
-                    <p>${photo.description || 'No description available'}</p>
+          return `
+          <div class="favorite-item">
+                    <img class="favorite-image" src=${photo.urls.small} alt="Liked Artwork" />
+                    <p>${photo.alt_description || 'No description available'}</p>
                     <button class="remove-btn">Remove</button>
                   </div>`;
         });
   
         // Update the Favorites container with the HTML
-        favoritesContainer.innerHTML = favoriteUrls.join('');
+        main.innerHTML = favoriteUrls.join('');
 
 
         const removeButtons = document.querySelectorAll('.favorite-item .remove-btn');
@@ -175,56 +191,93 @@ function toggleLike(event){
 
 
 
-
-main.addEventListener('click', (event) => {
-  if (event.target.tagName === 'IMG') {
-    const selectedImage = event.target;
-    const imageUrl = selectedImage.src;
-    const imageDetails = getImageDetails(imageUrl);
-
-    displayImageDetails(imageDetails);
-  }
-});
-
-function getImageDetails(imageUrl) {
-  return {
-    title: "title",
-    description: "image desc",
-    author: "author",
-    imageUrl: imageUrl,
+async function getImageDetails(imageId) {
+  const result = await unsplash.photos.get({
+    photoId: imageId,
+  });
+  console.log(result.response);
+  const getPhoto = result.response;
+  const detialsTo = {
+    title: getPhoto.alt_description,
+    description: getPhoto.description,
+    author: getPhoto.user,
+    imageUrl: getPhoto.urls.small,
   };
+  console.log(detialsTo);
+  return detialsTo;
 }
 
 function displayImageDetails(imageDetails) {
-  // Create a popup container
-  const popupContainer = document.createElement("div");
-  popupContainer.classList.add("popup-container");
-
-  // Create the image card
-  const card = document.createElement("div");
-  card.classList.add("image-card");
-
-  card.innerHTML = `
-    <img src="${imageDetails.imageUrl}" alt="${imageDetails.title}">
-    <h3>${imageDetails.title}</h3>
-    <p>${imageDetails.description}</p>
-    <p>Author: ${imageDetails.author}</p>
+  const modal = document.getElementById('modalContent');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const modalContent = `
+  <img src="${imageDetails.imageUrl}" alt="${imageDetails.title}">
+  <h3>${imageDetails.title}</h3>
+  <p>${imageDetails.description}</p>
   
-    <button class="close-popup">&times;</button>
-  `;
+`;
+  modal.innerHTML = modalContent;
+  document.getElementById('overlay').style.display = 'block';
+  document.getElementById('modal').style.display = 'block';
 
-  // Append the card to the popup container
-  popupContainer.appendChild(card);
-
-  // Append the popup container to the body
-  document.body.appendChild(popupContainer);
-
-  // Add event listener to close the popup when the close button is clicked
-  const cancelPopupButton = document.querySelector('.close-popup');
-  cancelPopupButton.addEventListener('click', () => {
-    // Remove the popup container when the cancel button is clicked
-    popupContainer.remove();
+  closeModalBtn.addEventListener('click', () => {
+    document.getElementById('overlay').style.display = 'none';
+    document.getElementById('modal').style.display = 'none';
   });
+  // main.appendChild(card);
 }
+
+
+
+// main.addEventListener('click', (event) => {
+//   if (event.target.tagName === 'IMG') {
+//     const selectedImage = event.target;
+//     const imageUrl = selectedImage.src;
+//     const imageDetails = getImageDetails(imageUrl);
+
+//     displayImageDetails(imageDetails);
+//   }
+// });
+
+// function getImageDetails(imageUrl) {
+//   return {
+//     title: "title",
+//     description: "image desc",
+//     author: "author",
+//     imageUrl: imageUrl,
+//   };
+// }
+
+// function displayImageDetails(imageDetails) {
+//   // Create a popup container
+//   const popupContainer = document.createElement("div");
+//   popupContainer.classList.add("popup-container");
+
+//   // Create the image card
+//   const card = document.createElement("div");
+//   card.classList.add("image-card");
+
+//   card.innerHTML = `
+//     <img src="${imageDetails.imageUrl}" alt="${imageDetails.title}">
+//     <h3>${imageDetails.title}</h3>
+//     <p>${imageDetails.description}</p>
+//     <p>Author: ${imageDetails.author}</p>
+  
+//     <button class="close-popup">&times;</button>
+//   `;
+
+//   // Append the card to the popup container
+//   popupContainer.appendChild(card);
+
+//   // Append the popup container to the body
+//   document.body.appendChild(popupContainer);
+
+//   // Add event listener to close the popup when the close button is clicked
+//   const cancelPopupButton = document.querySelector('.close-popup');
+//   cancelPopupButton.addEventListener('click', () => {
+//     // Remove the popup container when the cancel button is clicked
+//     popupContainer.remove();
+//   });
+// }
 
 
