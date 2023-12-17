@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentCategory = '';
   let likedImages = JSON.parse(localStorage.getItem('likedImages')) || [];
 
-  const homeLink = document.querySelector('a[href="#home-section"]');
+  const homeLink = document.querySelector('.home');
   
   
   const navLinks = document.querySelectorAll(".nav-link");
@@ -39,13 +39,18 @@ document.addEventListener('DOMContentLoaded', () => {
    renderGallery('', 1);
 
   function renderGallery(category, page) {
-
+    const prevNextContainer = document.querySelector('.prev-next');
     if (category === '') {
       // Clear the main container for the home section
-      main.innerHTML = '<h1>Welcome to Artify!</h1><p>Discover and explore a world of art.</p>';
+      main.innerHTML = 
+      `<h1>Welcome to Artify!</h1> 
+      <p>Discover and explore a world of art.</p>
+
+      `;
+      prevNextContainer.style.display = 'none';
       return;
     }
-
+    prevNextContainer.style.display = 'flex'; 
 
     unsplash.search
     .getPhotos({
@@ -281,7 +286,7 @@ navToggle.addEventListener('click', () => {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  const navLinks = document.querySelectorAll('.nav-link, .favorites');
+  const navLinks = document.querySelectorAll('.nav-link, .favorites ,.home');
 
   navLinks.forEach(link => {
     link.addEventListener('click', function (event) {

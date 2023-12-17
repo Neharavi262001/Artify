@@ -60,13 +60,14 @@ header nav{
 }
 
 .nav-menu li .nav-link:hover,
-nav .favorites:hover {
+nav .favorites :hover {
   color: #0a0a0a; /* Change to the desired text color on hover */
   background-color: white;
   border-radius: 10px;
   box-shadow: -1px 6px 10px 0px rgba(99,97,97,0.75); 
   transform: scale(1.09);
 }
+
 
 .nav-menu li .nav-link.active,
 nav .favorites.active {
@@ -78,7 +79,36 @@ nav .favorites.active {
   transition-delay: 0.1s;
 }
 
+.home:hover{
+  color: #0a0a0a; /* Change to the desired text color on hover */
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: -1px 6px 10px 0px rgba(99,97,97,0.75); 
+  transform: scale(1.09);
+}
+.home.active {
+  color: #ffffff; /* Change to the desired text color for the active state */
+  background-color: #060606; 
+  border-radius: 10px;
+  box-shadow: -1px 6px 10px 0px rgba(99,97,97,0.75); 
   
+  transition-delay: 0.1s;
+}
+
+nav .home{
+  cursor: pointer;
+  padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: rgb(22, 21, 21);
+      font-size: 15px;
+      font-weight:bold;
+      text-decoration: none;
+      margin-right: 50px;
+      transition: color 0.3s, background-color 0.3s, transform 0.3s;
+}  
   
 
 
