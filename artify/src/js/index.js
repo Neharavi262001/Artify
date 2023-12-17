@@ -1,23 +1,19 @@
-import {createApi} from 'unsplash-js'
-let  accessKey= 'E3A9y0TjAU1tClEJeY0eKDgMz9cxNrpFs6nLpsfsIm8'
-const unsplash = createApi({
-  accessKey:accessKey
-});
-
-
+import { unsplash } from './unsplash';
+import getImageDetails from './getImageDetails';
+import displayImageDetails from './displayImageDetails';
 
 document.addEventListener('DOMContentLoaded', () => {
 
   const main = document.querySelector('.container');
+  const homeLink = document.querySelector('.home');
+  const exploreHomeButton = document.getElementById('explore-home');
   
 
   let currentPage = 1;
   let currentCategory = '';
   let likedImages = JSON.parse(localStorage.getItem('likedImages')) || [];
 
-  const homeLink = document.querySelector('.home');
-  
-  const exploreHomeButton = document.getElementById('explore-home');
+ 
 
 
   const navLinks = document.querySelectorAll(".nav-link");
@@ -37,17 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   homeLink.addEventListener('click', function (event) {
     event.preventDefault();
-    renderGallery('', 1); // Pass an empty category to render the home section
+    renderGallery('', 1);
   });
-   // Default rendering on page load
    renderGallery('', 1);
 
   function renderGallery(category, page) {
     const prevNextContainer = document.querySelector('.prev-next');
     if (category === '') {
-      // Clear the main container for the home section
-
-      
       const homeContent=`
       
       <div id="home-section" >
@@ -70,15 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       
       </section>
-     
-      
-
       <section class="contact">
                 <h2>Contact Us</h2>
                 <p>Have questions or want to get in touch? Feel free to reach out to us. We would love to hear from you!</p>
                 <p>&#128386   abc@gmail.com</p>
                 <p> &#128382; +9196xxxxxxx</p>
-            </section>
+      </section>
       
 
       `
@@ -113,29 +102,15 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>`;
         });
         main.innerHTML = getUrls.join('');
-
-        
         addLikeButtonListeners();
+
         const imageButton = document.querySelector('.imageButton');
-
         imageButton.addEventListener('click', displayImageDetails);
-
-        // if (main.innerHTML === '') {
-        //   // Render home section if the main container is empty
-        //   main.innerHTML = '<h1>Welcome to Artify!</h1><p>Discover and explore a world of art.</p>';
-        // }
       
       }
     });
   }
 
-
- 
-  
-
-
-
-  // Favourites section
   function addLikeButtonListeners() {
     const likeButtons = document.querySelectorAll('.like-btn');
     likeButtons.forEach(button => {
@@ -151,8 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  //toggle function
-  //toggle function
+  
 function toggleLike(event){
   const button = event.target;
   const photoId = button.dataset.photoId;
@@ -164,18 +138,18 @@ function toggleLike(event){
     likedImages = likedImages.filter(id => id !== photoId);
   }
   localStorage.setItem('likedImages', JSON.stringify(likedImages));
-  // Toggle the button text content and dataset
+  
   button.innerHTML = isLiked ?   '&#129293;' : '&#10084;' ;
   button.dataset.liked = isLiked ? 'false' : 'true';
 
-  //renderFavorites();
+ 
 }
 
 
   function renderFavorites() {
     const favoriteDetails = [];
 
-    // Fetch details for each liked photo asynchronously
+    
     async function fetchPhotoDetails(photoId) {
       const response = await unsplash.photos.get({ photoId });
       if (response.type === 'success') {
@@ -193,9 +167,9 @@ function toggleLike(event){
       console.log(favoriteDetails)
     });
 
-       // Wait for all fetches to complete
+       
        Promise.all(fetchDetailsPromises).then(() => {
-        // Generate HTML for each liked photo
+        
         const favoriteUrls = favoriteDetails.map((photo) => {
           return `
           <div class="favorite-item">
@@ -205,7 +179,7 @@ function toggleLike(event){
                   </div>`;
         });
   
-        // Update the Favorites container with the HTML
+        
         main.innerHTML = favoriteUrls.join('');
 
 
@@ -222,32 +196,21 @@ function toggleLike(event){
     function removeFavoriteItem(event) {
       const button = event.target;
       const photoId = button.dataset.photoId;
+    likedImages = likedImages.filter((id) => id !== photoId);
+    const likeButton = document.querySelector(`.like-btn[data-photo-id="${photoId}"]`);
     
-      // Remove the corresponding item from the likedImages array
-      likedImages = likedImages.filter((id) => id !== photoId);
-    
-      // Find the corresponding like button in the main gallery
-      const likeButton = document.querySelector(`.like-btn[data-photo-id="${photoId}"]`);
-    
-      // Update the like button text and dataset
+     
       if (likeButton) {
         likeButton.innerHTML = '&#129293;';
         likeButton.dataset.liked = 'false';
       }
-    
-      // Remove the favorite item from the DOM
       const favoriteItem = button.closest('.favorite-item');
       favoriteItem.remove();
-    
-      // Re-render the favorites section
       renderFavorites();
     }
     
 
-
-
   const loadMoreBtn = document.querySelector('#show-more-btn');
-
   loadMoreBtn.addEventListener("click", () => {
     currentPage++;
     renderGallery(currentCategory, currentPage);
@@ -262,54 +225,8 @@ function toggleLike(event){
     
   })
 
-  //renderGallery('Home');
-});
-
-
-
-async function getImageDetails(imageId) {
-  const result = await unsplash.photos.get({
-    photoId: imageId,
-  });
-  console.log(result.response);
-  const getPhoto = result.response;
-  const detialsTo = {
-    title: getPhoto.alt_description,
-    description: getPhoto.description,
-    author: getPhoto.user,
-    imageUrl: getPhoto.urls.small,
-  };
-  console.log(detialsTo);
-  return detialsTo;
-}
-
-function displayImageDetails(imageDetails) {
-  const modal = document.getElementById('modalContent');
-  const closeModalBtn = document.getElementById('closeModalBtn');
-  const modalContent = `
-  <a href="${imageDetails.imageUrl}" target="_blank">
-  <img src="${imageDetails.imageUrl}" alt="${imageDetails.title}" title="Click to see full image">
-</a>
-  <h3>${imageDetails.title.toUpperCase()}</h3>
-  <p>${imageDetails.description || 'No description available'}</p>
-  <p>Artist : ${imageDetails.author.first_name}</p>
-  <p>Updated at : ${imageDetails.author.updated_at}</p>
-  <a href='${imageDetails.author.links.html}' target="_blank">See more</a>
   
-`
-;
-console.log(imageDetails)
-  modal.innerHTML = modalContent;
-  document.getElementById('overlay').style.display = 'block';
-  document.getElementById('modal').style.display = 'block';
-
-  closeModalBtn.addEventListener('click', () => {
-    document.getElementById('overlay').style.display = 'none';
-    document.getElementById('modal').style.display = 'none';
-  });
-  // main.appendChild(card);
-}
-
+});
 
 
 
@@ -320,23 +237,16 @@ const navToggle = document.querySelector('.nav-toggle');
 navToggle.addEventListener('click', () => {
   navMenu.classList.toggle('active');
 });
-
-
-document.addEventListener('DOMContentLoaded', function () {
-  const navLinks = document.querySelectorAll('.nav-link, .favorites ,.home');
+const navLinks = document.querySelectorAll('.nav-link, .favorites ,.home');
 
   navLinks.forEach(link => {
     link.addEventListener('click', function (event) {
-      // Remove the 'active' class from all links
+      
       navLinks.forEach(link => {
         link.classList.remove('active');
       });
-
-      // Add the 'active' class to the clicked link
       this.classList.add('active');
-
-      // Prevent the default behavior of the link (e.g., page reload)
       event.preventDefault();
     });
   });
-});
+

@@ -9,7 +9,6 @@ body {
   margin: 0px;
   padding: 0px;
   scroll-behavior: smooth;
-
 }
 
 
@@ -17,10 +16,9 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-
 body {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
 }
 #main{
   background-color: #efeffc;
@@ -28,19 +26,18 @@ body {
 
 
 header nav{
-  display: flex;
-  height: 5%;
+    display: flex;
+    height: 5%;
     justify-content: space-between;
     align-items: center;
     padding :20px;
     box-shadow: -1px 6px 10px 0px rgba(99,97,97,0.75);
     position: fixed;
     top: 0;
-  left: 0;
-
-  width: 100%;
-  background-color: #fff; /* Add a background color for better visibility */
-  z-index: 1000;
+    left: 0;
+    width: 100%;
+    background-color: #fff; 
+    z-index: 1000;
 }
 
 .nav-heading{
@@ -51,13 +48,13 @@ header nav{
 
 .nav-menu{
   display: flex;
-    align-items: center;
-    list-style: none;
-    gap: 50px;
+  align-items: center;
+  list-style: none;
+  gap: 50px;
 }
 
 .nav-menu li .nav-link{
-  cursor: pointer;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -73,7 +70,7 @@ header nav{
 
 .nav-menu li .nav-link:hover,
 nav .favorites :hover {
-  color: #0a0a0a; /* Change to the desired text color on hover */
+  color: #0a0a0a;
   background-color: white;
   border-radius: 10px;
   box-shadow: -1px 6px 10px 0px rgba(99,97,97,0.75); 
@@ -92,7 +89,7 @@ nav .favorites.active {
 }
 
 .home:hover{
-  color: #0a0a0a; /* Change to the desired text color on hover */
+  color: #0a0a0a; 
   background-color: white;
   border-radius: 10px;
   box-shadow: -1px 6px 10px 0px rgba(99,97,97,0.75); 
@@ -103,13 +100,12 @@ nav .favorites.active {
   background-color: #060606; 
   border-radius: 10px;
   box-shadow: -1px 6px 10px 0px rgba(99,97,97,0.75); 
-  
   transition-delay: 0.1s;
 }
 
 nav .home{
-  cursor: pointer;
-  padding: 10px;
+      cursor: pointer;
+      padding: 10px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -125,8 +121,8 @@ nav .home{
 
 
 nav .favorites{
-  cursor: pointer;
-padding: 10px;
+    cursor: pointer;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -225,7 +221,6 @@ padding: 10px;
   transform: scale(0.9);
 }
 
-
 .about-section {
   width: 100vw;
   height: 90vh;
@@ -234,7 +229,6 @@ padding: 10px;
   border-bottom: 1px solid #ddd;
   display: flex;
   justify-content: space-between;
-  
 }
 
 .about-section h2 {
@@ -247,7 +241,6 @@ padding: 10px;
   font-size: 1.2em;
   color: #666;
   margin-top: 15px;
-  
 }
 
 .about-section img{
@@ -300,14 +293,10 @@ padding: 10px;
 }
 
 .image-description p {
-  
   color: #0f0f0f;
   text-align: center;
   font-size: smaller;
- margin:10px 5px;
- 
-  
-  
+  margin:10px 5px;
 }
 
 .image-description .like-btn{
@@ -319,7 +308,6 @@ padding: 10px;
   font-size: 1.5rem;
   cursor: pointer;
   transition: color 0.3s;
-
 }
 
 .image-description .like-btn:hover {
@@ -331,17 +319,19 @@ padding: 10px;
 }
 
 footer {
-  height: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  height: 18px;
 }
 footer p{
   text-align: center;
-  font-size: smaller;
+  font-size: 8px;
+  padding-top: 0px;
 }
-
-
-
-
-
 
 #overlay {
   display: none;
@@ -374,8 +364,13 @@ footer p{
   position: absolute;
   top: 10px;
   right: 10px;
-  font-size: 20px;
+  font-size: 30px;
+  font-weight: bolder;
   cursor: pointer;
+  color: rgb(0, 0, 0);
+  background:rgb(255, 254, 254) ;
+  border: none;
+  border-radius: 5px;
 }
 
 #openModalBtn {
@@ -383,7 +378,6 @@ footer p{
   font-size: 16px;
   cursor: pointer;
 }
-
 
 .favorite-item{
   width: calc(33.33% - 20px); 
@@ -417,24 +411,21 @@ footer p{
   height: 30px;
   border-radius: 30px;
   cursor: pointer;
-  
   font-size: 0.8rem;
   font-weight: bolder;
   color:rgb(173, 20, 20) ;
   text-align: center;
-
 }
 
 .favorite-item .remove-btn:hover {
-  background-color: rgb(173, 20, 20); /* Change to the desired hover background color */
-  color: white; /* Change to the desired hover text color */
-}
+  background-color: rgb(173, 20, 20); 
+  color: white;
+} 
 .favorite-item .remove-btn:active {
-  background-color: rgb(238, 10, 10); /* Change to the desired active background color */
-  border-color:  rgb(238, 10, 10); /* Change to the desired active border color */
-  color: white; /* Change to the desired active text color */
+  background-color: rgb(238, 10, 10); 
+  border-color:  rgb(238, 10, 10); 
+  color: white; 
 }
-
 .prev-next{
   display: flex;
   justify-content: center;
@@ -442,18 +433,18 @@ footer p{
   width: auto;
   height: 3rem;
   gap: 10px;
-  
+  padding-bottom:20px ;
 }
 
 .prev-next-btns{
-  font-size: 15px;
-  font-weight: 40px;
+  font-size: 17px;
+  font-weight: 50px;
   border-radius: 4px;
   background-color: white;
-
+  width: 50px;
+  
 }
 
- 
   #show-less-btn:hover,
   #show-more-btn:hover {
     background-color: #ddd;
@@ -462,10 +453,7 @@ footer p{
 
   
 
-
-
-
-
+/*--------Mobile phones-------*/
 
 @media screen and (max-width: 768px) {
   .image-container {
@@ -474,7 +462,6 @@ footer p{
 
   .favorite-item{
     width: calc(100% - 20px);
-
   }
 
   .nav-menu {
@@ -503,12 +490,6 @@ footer p{
     display: block;
   }
 
-  
-
-  
-
- 
-
   #home-section h1 {
     font-size: 1.8em;
   }
@@ -526,8 +507,6 @@ footer p{
     padding: 20px;
     display: flex;
     flex-direction: column;
-   
-    
   }
 
   .about-section h2 {
@@ -543,11 +522,3 @@ footer p{
     margin: 0;
   }
   }
-
-  
-
-
-
-
-
-
