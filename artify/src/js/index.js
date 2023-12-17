@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addLikeButtonListeners();
         const imageButton = document.querySelector('.imageButton');
 
-          imageButton.addEventListener('click', displayImageDetails);
+        imageButton.addEventListener('click', displayImageDetails);
       
       }
     });
@@ -179,7 +179,7 @@ function toggleLike(event){
 
 
 
-  const loadMoreBtn = document.querySelector('#load-more-btn');
+  const loadMoreBtn = document.querySelector('#show-more-btn');
 
   loadMoreBtn.addEventListener("click", () => {
     currentPage++;
@@ -214,7 +214,7 @@ function displayImageDetails(imageDetails) {
   <a href="${imageDetails.imageUrl}" target="_blank">
   <img src="${imageDetails.imageUrl}" alt="${imageDetails.title}" title="Click to see full image">
 </a>
-  <h3>${imageDetails.description.toUpperCase()}</h3>
+  <h3>${imageDetails.title.toUpperCase()}</h3>
   
   <p>Author : ${imageDetails.author.first_name}</p>
   <p>Updated at : ${imageDetails.author.updated_at}</p>
