@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <p>Stay tuned for our upcoming exhibitions, workshops, and special events. Join us for an immersive art experience!</p>
       </div>
       <div class="about-images">
-      <img src="./images/gettyimages-1318837401-612x612.jpg" />
+      <img src="https://media.gettyimages.com/id/1318837401/photo/paris-france-a-visitor-photographs-the-painting-la-joconde-the-mona-lisa-by-italian-artist.jpg?s=612x612&w=0&k=20&c=x1LLCFwZNP-QPVBl_ywYuVMnR3BlFFGAjNrWpyGHDXw=" />
       </div>
       
       </section>
