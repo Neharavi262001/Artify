@@ -9,7 +9,7 @@ const unsplash = createApi({
 document.addEventListener('DOMContentLoaded', () => {
 
   const main = document.querySelector('.container');
-  //const favoritesContainer = document.getElementById('favorites-container');
+  
 
   let currentPage = 1;
   let currentCategory = '';
@@ -35,13 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
     renderGallery('', 1); // Pass an empty category to render the home section
   });
-
+   // Default rendering on page load
+   renderGallery('', 1);
 
   function renderGallery(category, page) {
 
     if (category === '') {
       // Clear the main container for the home section
-      main.innerHTML = '';
+      main.innerHTML = '<h1>Welcome to Artify!</h1><p>Discover and explore a world of art.</p>';
       return;
     }
 
