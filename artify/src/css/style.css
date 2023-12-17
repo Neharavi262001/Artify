@@ -8,6 +8,7 @@ html,
 body {
   margin: 0px;
   padding: 0px;
+  scroll-behavior: smooth;
 
 }
 #main{
@@ -149,7 +150,7 @@ padding: 10px;
   height: 80vh;
   text-align: center;
   padding: 40px;
-  background-color: white;
+  background-image: url("artify/src/images/d-koi-MG2fnK6pOdk-unsplash.jpg");
   border-bottom: 1px solid #ddd;
   display: flex;
   flex-direction: column;
@@ -224,6 +225,19 @@ padding: 10px;
   font-size: 1.2em;
   color: #666;
   margin-top: 15px;
+}
+
+.contact{
+  background-color: #333;
+  color: white;
+  width: 100vw;
+  padding: 20px;
+  font-weight: lighter;
+  
+}
+
+.contact p{
+  text-align: center;
 }
 
 

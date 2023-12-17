@@ -58,12 +58,18 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
 
       <section id='about' class="about-section">
+      <div class="about-text">
       <h2>About Artify</h2>
       <p>Artify is a platform that celebrates creativity and artistic expression. We showcase a diverse range of artworks, from modern abstracts to classical masterpieces.</p>
 
       <h2>Upcoming Events</h2>
-                <p>Stay tuned for our upcoming exhibitions, workshops, and special events. Join us for an immersive art experience!</p>
+      <p>Stay tuned for our upcoming exhibitions, workshops, and special events. Join us for an immersive art experience!</p>
       </section>
+      </div>
+      <div class="about-images">
+      <img />
+      </div>
+      
 
       <section class="contact">
                 <h2>Contact Us</h2>
