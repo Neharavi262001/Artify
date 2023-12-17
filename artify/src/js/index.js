@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const homeLink = document.querySelector('.home');
   
-  
+  const exploreHomeButton = document.getElementById('explore-home');
+
+
   const navLinks = document.querySelectorAll(".nav-link");
   const favorites = document.querySelector('.favorites');
   navLinks.forEach((link) => {
@@ -31,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   favorites.addEventListener('click', renderFavorites);
 
+ 
+
   homeLink.addEventListener('click', function (event) {
     event.preventDefault();
     renderGallery('', 1); // Pass an empty category to render the home section
@@ -42,11 +46,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevNextContainer = document.querySelector('.prev-next');
     if (category === '') {
       // Clear the main container for the home section
-      main.innerHTML = 
-      `<h1>Welcome to Artify!</h1> 
-      <p>Discover and explore a world of art.</p>
 
-      `;
+      
+      const homeContent=`
+      
+      <div id="home-section" >
+      
+      <h1>Welcome to Artify!</h1> 
+      <p>Discover and explore a world of art.</p>
+      <a href='#about' id="explore-home">Explore</a>
+      </div>
+
+      <section id='about' class="about-section">
+      <h2>About Artify</h2>
+      <p>Artify is a platform that celebrates creativity and artistic expression. We showcase a diverse range of artworks, from modern abstracts to classical masterpieces.</p>
+
+      <h2>Upcoming Events</h2>
+                <p>Stay tuned for our upcoming exhibitions, workshops, and special events. Join us for an immersive art experience!</p>
+      </section>
+
+      <section class="contact">
+                <h2>Contact Us</h2>
+                <p>Have questions or want to get in touch? Feel free to reach out to us. We would love to hear from you!</p>
+                <p>&#128386   abc@gmail.com</p>
+                <p> &#128382; +9196xxxxxxx</p>
+            </section>
+      
+
+      `
+    main.innerHTML = homeContent
+     ;
       prevNextContainer.style.display = 'none';
       return;
     }
