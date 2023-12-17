@@ -11,6 +11,17 @@ body {
   scroll-behavior: smooth;
 
 }
+
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 #main{
   background-color: #efeffc;
 }
@@ -150,7 +161,10 @@ padding: 10px;
   height: 80vh;
   text-align: center;
   padding: 40px;
-  background-image: url("artify/src/images/d-koi-MG2fnK6pOdk-unsplash.jpg");
+  background: url('../images/d-koi-MG2fnK6pOdk-unsplash.jpg');
+  object-fit: cover;
+  background-size:cover;
+ 
   border-bottom: 1px solid #ddd;
   display: flex;
   flex-direction: column;
@@ -168,6 +182,7 @@ padding: 10px;
   color: rgb(1, 1, 1); 
 }
 
+
 @keyframes fadeIn {
   to {
     opacity: 1; 
@@ -176,7 +191,8 @@ padding: 10px;
 
 #home-section h1 {
   font-size: 2.5em;
-  color: #333;
+  color: #060606;
+  font-weight:bolder;
 }
 
 #home-section p {
@@ -191,7 +207,9 @@ padding: 10px;
   border: none;
   color: white;
   text-decoration: none;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 3px;
   background-color: black;
   font-size: large;
@@ -210,21 +228,31 @@ padding: 10px;
 
 .about-section {
   width: 100vw;
-  height: 80vh;
-  padding: 40px;
+  height: 90vh;
+  padding: 70px;
   background-color: #fff;
   border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  
 }
 
 .about-section h2 {
   font-size: 2em;
   color: #333;
+  text-align: center;
 }
 
 .about-section p {
   font-size: 1.2em;
   color: #666;
   margin-top: 15px;
+  
+}
+
+.about-section img{
+  border-radius: 10px;
+  margin: 10px;
 }
 
 .contact{
@@ -458,6 +486,7 @@ padding: 10px;
     background-color: #fff;
     z-index: 1001;
     justify-content: space-around;
+    width: auto;
   }
 
   .nav-menu.active {
@@ -473,9 +502,51 @@ padding: 10px;
     display: block;
   }
 
+  
+
+  
+
+ 
+
+  #home-section h1 {
+    font-size: 1.8em;
+  }
+
+  #home-section p {
+    font-size: 1em;
+  }
+
+  #explore-home {
+    font-size: medium;
+  }
+
+  .about-section {
+    height: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+   
+    
+  }
+
+  .about-section h2 {
+    font-size: 1.5em;
+  }
+
+  .about-section p {
+    font-size: 1em;
+  }
+
+  .about-section img{
+    width: 100%;
+    margin: 0;
+  }
+  }
+
+  
 
 
-}
+
 
 
 

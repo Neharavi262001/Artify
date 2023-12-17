@@ -64,11 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <h2>Upcoming Events</h2>
       <p>Stay tuned for our upcoming exhibitions, workshops, and special events. Join us for an immersive art experience!</p>
-      </section>
       </div>
       <div class="about-images">
-      <img />
+      <img src="./images/gettyimages-1318837401-612x612.jpg" />
       </div>
+      
+      </section>
+     
       
 
       <section class="contact">
