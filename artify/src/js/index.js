@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPage = 1;
   let currentCategory = '';
   let likedImages = JSON.parse(localStorage.getItem('likedImages')) || [];
+
+  const homeLink = document.querySelector('a[href="#home-section"]');
+  
   
   const navLinks = document.querySelectorAll(".nav-link");
   const favorites = document.querySelector('.favorites');
@@ -28,8 +31,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   favorites.addEventListener('click', renderFavorites);
 
+  homeLink.addEventListener('click', function (event) {
+    event.preventDefault();
+    renderGallery('', 1); // Pass an empty category to render the home section
+  });
+
 
   function renderGallery(category, page) {
+
+    if (category === '') {
+      // Clear the main container for the home section
+      main.innerHTML = '';
+      return;
+    }
+
+
     unsplash.search
     .getPhotos({
       query: category,
@@ -60,11 +76,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const imageButton = document.querySelector('.imageButton');
 
         imageButton.addEventListener('click', displayImageDetails);
+
+        // if (main.innerHTML === '') {
+        //   // Render home section if the main container is empty
+        //   main.innerHTML = '<h1>Welcome to Artify!</h1><p>Discover and explore a world of art.</p>';
+        // }
       
       }
     });
   }
 
+
+ 
+  
 
 
 
@@ -195,7 +219,7 @@ function toggleLike(event){
     
   })
 
-  renderGallery('Home');
+  //renderGallery('Home');
 });
 
 

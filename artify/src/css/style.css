@@ -116,7 +116,7 @@ padding: 10px;
 }
 
 .image-container{
-  width: calc(29.33% - 20px); 
+  width: calc(33.33% - 20px); 
   background-color: #fff;
   margin: 10px;
 
@@ -284,7 +284,7 @@ padding: 10px;
 
 .prev-next-btns{
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 40px;
   border-radius: 4px;
   background-color: white;
 
